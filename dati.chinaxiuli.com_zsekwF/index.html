@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问答测试</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>问答测试</h1>
+
+        <!-- 科室选择 -->
+        <div class="input-group">
+            <label for="department">选择类型：</label>
+<select id="department-select">
+    <option value="urology">泌尿</option>
+    <option value="hematology">血液</option>
+</select>
+        </div>
+
+        <!-- 姓名输入框 -->
+        <div class="input-group">
+            <label for="name">姓名：</label>
+            <input type="text" id="name" placeholder="请输入您的姓名">
+        </div>
+
+        <!-- 手机号输入框 -->
+        <div class="input-group">
+            <label for="phone">手机号：</label>
+            <input type="text" id="phone" placeholder="请输入您的手机号">
+            <span id="phone-error" class="error-message"></span>
+        </div>
+
+        <!-- 提示消息 -->
+        <div id="input-error" class="error-message" style="display:none;">请输入姓名和手机号</div>
+
+        <!-- 开始答题按钮 -->
+        <button class="submit-btn" disabled>开始答题</button>
+
+        <!-- 定时器和得分 -->
+        <div class="timer" style="display:none;"></div>
+        <div class="score" style="display:none;">得分：0</div>
+
+        <!-- 题目标题 -->
+        <h2 class="q-title" style="display:none;"></h2>
+
+        <!-- 题目内容 -->
+        <div class="q-content" style="display:none;">
+            <div class="loading-text">图片加载中...</div>
+            <img src="" alt="问题图片" class="question-image">
+        </div>
+
+        <!-- 选项 -->
+        <div class="options" style="display:none;">
+            <ul>
+                <li class="option-content"><span></span></li>
+                <li class="option-content"><span></span></li>
+                <li class="option-content"><span></span></li>
+                <li class="option-content"><span></span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 总结页面 -->
+    <div class="summary-container" style="display:none;">
+        <h2>总结</h2>
+        <div class="final-score"></div>
+        <ul class="summary-list"></ul>
+        <button class="restart-btn">重新开始</button>
+    </div>
+
+    <!-- 模态框部分 -->
+    <div id="imageModal" class="modal">
+        <span class="close">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="">
+            <div class="modal-text">
+                <h3 id="doctorName"></h3>
+                <p id="doctorHospital"></p>
+                <p id="doctorDescription"></p>
+            </div>
+            <button class="close-btn">关闭</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+    padding: 20px;
+}
+
+.quiz-container {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    margin: auto;
+    text-align: center;
+}
+
+.quiz-container h1 {
+    color: #4CAF50;
+    margin-bottom: 20px;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+.timer, .score, .q-title, .q-content, .options {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.q-content {
+    text-align: center;
+    position: relative; /* 为绝对定位的“图片加载中”文本提供定位基础 */
+}
+
+.loading-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: #333;
+    background: rgba(255, 255, 255, 0.8); /* 背景颜色可调 */
+    padding: 10px;
+    border-radius: 5px;
+    display: none; /* 初始时隐藏 */
+}
+
+/* 统一问题显示图片的比例，按2:3展示 */
+.question-image {
+    display: block; /* 使图片为块级元素 */
+    margin: 0 auto; /* 居中图片 */
+    width: auto;
+    height: auto;
+    max-width: 280px; /* 缩小最大宽度 */
+    max-height: 420px; /* 按2:3比例缩小最大高度 */
+    object-fit: cover; /* 图片内容适应框大小 */
+    border-radius: 10px;
+    opacity: 0;
+    transition: opacity 1s ease-in-out; /* 渐进式过渡效果 */
+}
+
+.question-image.loaded {
+    opacity: 1; /* 加载完成时显示图像 */
+}
+
+.options ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.options li {
+    background: #e7e7e7;
+    margin: 5px 0;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.options li:hover {
+    background: #d4d4d4;
+    transform: scale(1.02);
+}
+
+.option-content {
+    display: flex;
+    align-items: center;
+}
+
+.option-content span {
+    flex-grow: 1;
+}
+
+.timer {
+    font-size: 20px;
+    color: #ff5722;
+    font-weight: bold;
+    text-align: center;
+}
+
+.score {
+    text-align: center;
+    color: #007bff;
+}
+
+.q-title {
+    text-align: center;
+    color: #343a40;
+}
+
+/* 统一结果展示界面点击显示的图片大小，按2:3展示 */
+.modal-content img {
+    display: block; /* 使图片为块级元素 */
+    margin: 0 auto; /* 居中图片 */
+    width: auto;
+    height: auto;
+    max-width: 240px; /* 缩小最大宽度 */
+    max-height: 360px; /* 按2:3比例缩小最大高度 */
+    object-fit: cover; /* 图片内容适应框大小 */
+    border-radius: 10px;
+}
+
+/* 总结页面样式 */
+.summary-container {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 450px;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.summary-container h2 {
+    text-align: center;
+    color: #343a40;
+}
+
+.summary-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.summary-list li {
+    background: #f4f4f4;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.summary-list li:hover {
+    background: #e7e7e7;
+    transform: scale(1.02);
+}
+
+.final-score {
+    text-align: center;
+    font-size: 20px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* 确保重新开始按钮居中 */
+.restart-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-align: center;
+}
+
+.restart-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* 模态框样式 */
+.modal {
+    display: none; /* 初始隐藏 */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px; /* 确保内容居中 */
+    border-radius: 10px;
+    position: relative;
+}
+
+/* 移除右上角的关闭按钮 */
+.close {
+    display: none; /* 隐藏右上角关闭按钮 */
+}
+
+/* 确保底部关闭按钮居中 */
+.close-btn {
+    display: block;
+    margin: 20px auto;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.close-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* 居中显示模态框中的名字和介绍 */
+.modal-text {
+    text-align: center; /* 居中 */
+}
+
+.modal-text h3 {
+    margin: 10px 0;
+    font-size: 24px;
+    color: #343a40;
+}
+
+.modal-text p {
+    margin: 5px 0;
+    color: #666;
+}
